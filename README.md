@@ -56,6 +56,8 @@ npm run dev      # http://localhost:3000
 npm run lint      # ESLint
 npm run build     # build de production (inclut le typecheck)
 npm start         # sert le build de production
+npm test          # tests vitest (déterminisme du moteur, harnais de gate V0)
+npm run tune:v0   # rapport texte du gate V0 simulé (VERT/ROUGE par critère)
 ```
 
 ## Structure
@@ -68,6 +70,8 @@ src/app/                          Pages Next.js (App Router)
 src/components/Game.tsx           Boucle de jeu V0 (canvas 2D)
 src/lib/physics/engine.ts         Intégrateur physique déterministe
 src/lib/game/                     Constantes de tuning et score local
+src/lib/game/v0-gate.ts           Harnais de mesure du gate V0 (populations simulées)
+scripts/tune-v0.ts                Rapport `npm run tune:v0`
 ```
 
 ## Convention
