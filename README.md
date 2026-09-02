@@ -27,7 +27,7 @@ statut du gate) vit dans `docs/versions/<version>.md`.
 
 | Version | Référence clonée | Statut |
 |---|---|---|
-| **V0 — Le feel nu** | Yetisports 1, Pingu Throw | 🟡 Prototype jouable, gate en attente d'un vrai playtest — voir [docs/versions/v0.md](docs/versions/v0.md) |
+| **V0 — Le feel nu** | Yetisports 1, Pingu Throw | 🟡 Gate simulé VERT (ratio novice p95/p50 3,61-3,94 sur 10 seeds, partie ≤ 12,1 s jauges comprises, entraîné/novice 4,4-4,6) après le tour de tuning 2 ; critères humains (20 lancers spontanés, 60 fps mobile) en attente d'un vrai playtest — voir [docs/versions/v0.md](docs/versions/v0.md) |
 | V1 — Le cœur Nanaca | Nanaca†Crash!! | ⬜ Non démarrée |
 | V2 — L'upload et la stylisation | Turbo Dismount (UX) | ⬜ Non démarrée |
 | V3 — Le casting | Nanaca†Crash!! / Paf le Chien | ⬜ Non démarrée |

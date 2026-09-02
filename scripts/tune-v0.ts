@@ -38,7 +38,9 @@ lines.push("");
 lines.push(
   `Physique : gravité ${params.gravity} px/s², traînée ${params.airDrag}/tick, ` +
     `restitution ${params.groundRestitution}, friction sol ${params.groundFriction}, ` +
-    `seuil d'arrêt ${params.stopSpeed} px/s`,
+    `conversion vy→vx ${params.impactLift}, enfoncement ${params.impactDig}, ` +
+    `plantage > ${params.plantAngleDeg}°, rebond si |vy| > ${params.bounceMinVy} px/s, ` +
+    `glissade −${params.slideDecel} px/s², seuil d'arrêt ${params.stopSpeed} px/s`,
 );
 lines.push(
   `Jauges   : angle ${ANGLE_MIN_DEG}°..${ANGLE_MAX_DEG}° (sinus, période ${ANGLE_PERIOD_S} s), ` +

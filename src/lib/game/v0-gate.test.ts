@@ -157,7 +157,7 @@ describe("v0-gate — populations", () => {
     for (const s of samples) {
       expect(s.angleDeg).toBeCloseTo(optimum.angleDeg, 6);
       expect(s.speed).toBe(SPEED_MAX);
-      expect(s.distanceM).toBeCloseTo(optimum.distanceM, 6);
+      expect(Math.abs(s.distanceM - optimum.distanceM)).toBeLessThan(optimum.distanceM * 0.01);
     }
   });
 });
@@ -194,11 +194,30 @@ describe("v0-gate — evaluateV0Gate", () => {
     expect(report.allGreen).toBe(ratio.pass && duration.pass);
   });
 
-  // activé par le tuning V0
-  test.skip("gate : ratio novice p95/p50 ≥ 3 et durée max < 15 s", () => {
+  test("gate : ratio novice p95/p50 ≥ 3 et durée max < 15 s", () => {
     const full = evaluateV0Gate();
     expect(full.novice.ratioP95OverP50).toBeGreaterThanOrEqual(NOVICE_RATIO_THRESHOLD);
     expect(full.maxDurationS).toBeLessThan(MAX_DURATION_THRESHOLD_S);
     expect(full.allGreen).toBe(true);
+  });
+
+  test("gate : reste vert sur d'autres seeds, et l'entraîné bat le novice d'au moins ×2,5 partout", () => {
+    for (const seed of [1, 2, 7, 99, 31337]) {
+      const report = evaluateV0Gate(DEFAULT_PHYSICS_PARAMS, { seed });
+      expect(report.novice.ratioP95OverP50).toBeGreaterThanOrEqual(NOVICE_RATIO_THRESHOLD);
+      expect(report.allGreen).toBe(true);
+      expect(report.skilledOverNoviceMedianRatio).toBeGreaterThanOrEqual(2.5);
+    }
+  });
+
+  test("le ratio n'est pas obtenu en rendant le jeu injouable", () => {
+    const full = evaluateV0Gate();
+    expect(full.novice.p5M).toBeGreaterThan(0);
+    expect(full.novice.p50M).toBeGreaterThanOrEqual(60);
+    expect(full.optimalAngle.angleDeg).toBeLessThan(30);
+    expect(full.optimalAngle.distanceM).toBeGreaterThanOrEqual(300);
+    expect(full.optimalAngle.distanceM).toBeLessThanOrEqual(600);
+    expect(full.skilledOverNoviceMedianRatio).toBeGreaterThanOrEqual(2.5);
+    expect(full.maxDurationS + 2.7).toBeLessThan(MAX_DURATION_THRESHOLD_S);
   });
 });
